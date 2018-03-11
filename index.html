@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>CARRITO DE COMPRAS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- INICIO SCRIPT -->
+    <script>
+        $(document).ready
+
+        var productos = [{
+            precio: 550000,
+            cantidad: 0
+        }, {
+            precio: 2500000,
+            cantidad: 0
+        }, {
+            precio: 2500000,
+            cantidad: 0
+        }, {
+            precio: 1400000,
+            cantidad: 0
+        }, {
+            precio: 30000,
+            cantidad: 0
+        }, {
+            precio: 300000,
+            cantidad: 0
+        }];
+
+        function iniciar() {
+            document.getElementById("ppro1").innerText = "Precio: $" + productos[0].precio + " Pesos";
+            document.getElementById("ppro2").innerText = "Precio: $" + productos[1].precio + " Pesos";
+            document.getElementById("ppro3").innerText = "Precio: $" + productos[2].precio + " Pesos";
+            document.getElementById("ppro4").innerText = "Precio: $" + productos[3].precio + " Pesos";
+            document.getElementById("ppro5").innerText = "Precio: $" + productos[4].precio + " Pesos";
+            document.getElementById("ppro6").innerText = "Precio: $" + productos[5].precio + " Pesos";
+			
+			totalizar();
+        }
+
+        function incrementar(indice, cant) {
+            var cntrl = document.getElementById("txtcant-p" + (indice + 1));
+			
+			var val = eval(cntrl.value);
+			if(val === NaN || val === undefined)
+				val = cant;
+			else
+				val += cant;
+			
+			if(val >= 0) {
+				cntrl.value = val;
+				productos[indice].cantidad = val;
+			}
+			
+			totalizar();
+        }
+		
+		
+		function actCant(indice) {
+			var cntrl = document.getElementById("txtcant-p" + (indice + 1));
+			
+			var val = eval(cntrl.value);
+			if(val === NaN || val === undefined)
+				val = 0;
+			
+			if(val >= 0) {
+				cntrl.value = val;
+				productos[indice].cantidad = val;
+			}
+			
+			totalizar();
+		}
+		
+		
+		function totalizar() {
+			var total = 0;
+			
+			for(p in productos) {
+				total += productos[p].precio * productos[p].cantidad;
+			}
+			
+			document.getElementById("lblValorTotal").innerText = total;
+		}
+    </script>
+    <!-- FIN SCRIPT -->
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+</head>
+
+<body onload="iniciar()">
+
+    <header class="jumbotron text-center">
+
+        <h1>CARRITO DE COMPRAS</h1>
+
+    </header>
+
+	<!-- INICIO IMAGEN CARRITO -->
+	<div style="position: fixed; top: 20px; right: 20px; background-color: gold; font-size: 16pt; font-family: Arial; padding: 14px 14px 14px 14px; border-radius: 6px;">
+		    <span class="glyphicon glyphicon-shopping-cart">&nbsp;
+		   $<span id="lblValorTotal"></span>
+	</div>
+    <!-- FIN IMAGEN CARRITO -->
+	
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+            <!-- INICIO PRIMER CLASS="ROW" -->
+            <div style="padding: 20px 20px 20px 20px;" class="row text-center">
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen1.png" alt="Producto 1" width="150" height="150" />
+                            </figure>
+                            <p><b id="ppro1"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p1">
+                            <input style="width: 80px;" id="txtcant-p1" type="text" name="cant-p1" value="" onkeyup="actCant(0)" onkeydown="actCant(0)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(0, 1)">                        
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(0, -1)">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen2.png" alt="Producto 2" width="110" height="150" />
+                            </figure>
+                            <p><b id="ppro2"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p2">
+                            <input style="width: 80px;" id="txtcant-p2" type="text" name="cant-p2" value=""  onkeyup="actCant(1)" onkeydown=="actCant(1)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(1, 1)">                        
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(1, -1)">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen3.png" alt="Producto 3" width="150" height="150" />
+                            </figure>
+                            <p><b id="ppro3"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p3">
+                            <input style="width: 80px;" id="txtcant-p3" type="text" name="cant-p3" value=""  onkeyup="actCant(2)" onkeydown=="actCant(2)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(2, 1)">                        
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(2, -1)">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN PRIMER CLASS="ROW" -->
+
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+            <!-- INICIO SEGUNDO CLASS="ROW" -->
+            <div style="padding: 0px 20px 20px 20px;" class="row text-center">
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen4.png" alt="Producto 4" width="150" height="150" />
+                            </figure>
+                            <p><b id="ppro4"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p4">
+                            <input style="width: 80px;" id="txtcant-p4" type="text" name="cant-4" value=""  onkeyup="actCant(3)" onkeydown=="actCant(3)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(3, 1)">                        
+                                <span class="glyphicon glyphicon-plus-sign"></span>
+                            </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(3, -1)">
+                                <span class="glyphicon glyphicon-minus-sign"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen5.png" alt="Producto 5" width="150" height="150" />
+                            </figure>
+                            <p><b id="ppro5"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p5">
+                            <input style="width: 80px;" id="txtcant-p5" type="text" name="cant-p5" value=""  onkeyup="actCant(4)" onkeydown=="actCant(4)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(4, 1)">                        
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(4, -1)">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+                <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <figure>
+                                <img src="imagenes/imagen6.png" alt="Producto 6" width="150" height="150" />
+                            </figure>
+                            <p><b id="ppro6"></b></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" id="cantidad-p6">
+                            <input style="width: 80px;" id="txtcant-p6" type="text" name="cant-p6" value=""  onkeyup="actCant(5)" onkeydown=="actCant(5)" />
+                            <button type="button" class="btn btn-default" onclick="incrementar(5, 1)">                        
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                        </button>
+
+                            <button type="button" class="btn btn-default" onclick="incrementar(5, -1)">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIN SEGUNDO CLASS="ROW" -->
+
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+        </div>
+
+    </div>
+
+    <!--<script src="js/bootstrap.min.js"></script>-->
+
+</body>
+
+</html>
